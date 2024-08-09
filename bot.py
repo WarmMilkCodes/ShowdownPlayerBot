@@ -2,18 +2,20 @@ import asyncio, os
 import discord, logging
 from utils.logger import setup_logging
 from discord.ext import commands
-from config import bot_token as token
+from config import DISCORD_TOKEN
 
-setup_logging()
-logger = logging.getLogger('scl_log')
+# Configure logging
+bot_logger = setup_logging()
+logger = logging.getLogger(__name__)
 
 intents = discord.Intents.all()
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='?', intents=intents)
 
 @bot.event
 async def on_ready():
-    logger.info(f"Logged in as {bot.user}")
+    logger.info(f'Logged in as {bot.user}')
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="SCL Players"))
+
 
 # Load cogs from cogs directory
 def load_extensions():
@@ -30,7 +32,8 @@ def load_extensions():
 async def main():
     async with bot:
         load_extensions()
-        await bot.start(token)
+        await bot.start(DISCORD_TOKEN)
 
 if __name__ == "__main__":
     asyncio.run(main())
+
