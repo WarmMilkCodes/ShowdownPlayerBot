@@ -39,7 +39,7 @@ class StaffCommands(commands.Cog):
 
         user_roles = '\n'.join([x.mention for x in user.roles if x != ctx.guild.default_role])
         if user_roles:
-            embed.add_field(name="User Roles", value=user_roles, inline=False)
+            embed.add_field(name="User Roles", value=user_roles)
 
         embed.add_field(name="Team Info", value=team_info, inline=False)
 
