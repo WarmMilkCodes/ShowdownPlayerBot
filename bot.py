@@ -1,8 +1,11 @@
-import discord, os, logging, asyncio
+import asyncio, os
+import discord, logging
+from utils.logger import setup_logging
 from discord.ext import commands
 from config import bot_token as token
 
-logger = logging.getLogger('showdown_log')
+setup_logging()
+logger = logging.getLogger('scl_log')
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
@@ -15,7 +18,7 @@ async def on_ready():
 # Load cogs from cogs directory
 def load_extensions():
     logger.info("Loading cogs...")
-    for filename in os.listdir('.cogs'):
+    for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
             try:
                 bot.load_extension(f'cogs.{filename[:-3]}')
