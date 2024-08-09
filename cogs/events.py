@@ -10,8 +10,6 @@ class EventsCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        logger.info(f"Guild ID from config: {config.scl_server}")
-        logger.info(f"Channel ID for new member joins: {config.new_member_announce}")
         guild = self.bot.get_guild(config.scl_server)
 
         if guild:
@@ -21,21 +19,21 @@ class EventsCog(commands.Cog):
 
                 if member.bot:
                     # Check if the bot exists in the database
-                    bot_in_db = dbInfo.player_collection.find_one({"Discord ID": member.id})
+                    bot_in_db = dbInfo.player_collection.find_one({"Discord ID": int(member.id)})
 
                     # If bot found in database, remove
                     if bot_in_db:
-                        dbInfo.player_collection.delete_one({"Discord ID": member.id})
+                        dbInfo.player_collection.delete_one({"Discord ID": int(member.id)})
                         logger.info(f"Removed bot {member.name} from player collection")
                     continue
 
                 # Check if member exists in player collection
-                existing_member = dbInfo.player_collection.find_one({"Discord ID": member.id})
+                existing_member = dbInfo.player_collection.find_one({"Discord ID": int(member.id)})
 
                 if not existing_member:
                     last_id = dbInfo.player_collection.find_one(sort=[('SCL ID', -1)], projection={'_id':0, 'SCL ID':1})
                     new_id = last_id['SCL ID'] + 1 if last_id else 1
-                    player_info = {"Discord ID":member.id, "SCL ID": int(new_id), "User Name":member.name, "Display Name":member.display_name, "Team": "Unassigned"}
+                    player_info = {"Discord ID":int(member.id), "SCL ID": int(new_id), "User Name":member.name, "Display Name":member.display_name, "Team": "Unassigned"}
                     dbInfo.player_collection.insert_one(player_info)
                     logger.info(f"Added {member.name} to player collection")
         
@@ -49,12 +47,12 @@ class EventsCog(commands.Cog):
             return
         
         # Check if member exists in user table already
-        existing_member = dbInfo.player_collection.find_one({"Discord ID":member.id})
+        existing_member = dbInfo.player_collection.find_one({"Discord ID":int(member.id)})
 
         if not existing_member:
                     last_id = dbInfo.player_collection.find_one(sort=[('SCL ID', -1)], projection={'_id':0, 'SCL ID':1})
                     new_id = last_id['SCL ID'] + 1 if last_id else 1
-                    player_info = {"Discord ID":member.id, "SCL ID": int(new_id), "User Name":member.name, "Display Name":member.display_name, "Team": "Unassigned"}
+                    player_info = {"Discord ID":int(member.id), "SCL ID": int(new_id), "User Name":member.name, "Display Name":member.display_name, "Team": "Unassigned"}
                     dbInfo.player_collection.insert_one(player_info)
                     logger.info(f"Added {member.name} to player collection")
 
