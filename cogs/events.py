@@ -10,9 +10,12 @@ class EventsCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
+        logger.info(f"Guild ID from config: {config.scl_server}")
+        logger.info(f"Channel ID for new member joins: {config.new_member_announce}")
         guild = self.bot.get_guild(config.scl_server)
 
         if guild:
+            logger.info(f"Found guild: {guild.name}")
             for member in guild.members:
                 logger.info(f"Checking member: {member.name}")
 
