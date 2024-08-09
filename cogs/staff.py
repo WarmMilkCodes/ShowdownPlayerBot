@@ -44,3 +44,6 @@ class StaffCommands(commands.Cog):
         embed.add_field(name="Team Info", value=team_info)
 
         await ctx.respond(embed=embed)
+
+def setup(bot):
+    bot.add_cog(StaffCommands(bot))
