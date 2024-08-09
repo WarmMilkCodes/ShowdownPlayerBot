@@ -14,3 +14,6 @@
 2024-08-09 00:15:38,474 INFO:scl_log:Loading cogs...
 2024-08-09 00:15:39,957 ERROR:scl_log:Error loading cogs.events: Extension 'cogs.events' raised an error: TypeError: name must be an instance of str
 2024-08-09 00:15:42,937 INFO:scl_log:Logged in as Showdown Player Bot#0239
+2024-08-09 11:11:47,427 INFO:scl_log:TestCog Ready.
+2024-08-09 11:28:55,053 INFO:scl_log:TestCog Ready.
+2024-08-09 11:30:07,194 INFO:scl_log:TestCog Ready.
