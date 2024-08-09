@@ -66,7 +66,7 @@ class TransactionCommands(commands.Cog):
 
 
     ## Commands Section ##
-    @commands.slash_command(description="Sign player to team")
+    @commands.slash_command(guild_ids=[GUILD_ID], description="Sign player to team")
     @commands.has_any_role("All Staff", "League Scribe")
     async def sign_player(self, ctx, user:Option(discord.Member), team_abbreviation: Option(str, "Enter 3-letter team abbreviation")):
         logger.info(f"Sign player command initiated for {user.name}")
