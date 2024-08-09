@@ -90,10 +90,11 @@ class TransactionCommands(commands.Cog):
                 return await ctx.respond(f"Invalid team abbreviation: {team_abbreviation.upper()}")
             
             FA = discord.utils.get(ctx.guild.roles, name="F/A")
+            team_role = ctx.guild.get_role(team_role_id)
             await self.add_role_to_member(user, ctx.guild.get_role(team_role_id), "Player Signing")
             await self.remove_role_from_member(user, FA, "Player Signing")
 
-            message = f"{user.mention} has been signed to {team_role_id.mention}"
+            message = f"{user.mention} has been signed to {team_role.mention}"
             channel = self.bot.get_channel(config.posted_transactions_channel)
             await channel.send(message)
 
