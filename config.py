@@ -13,6 +13,7 @@ TEAM_COLLECTION = os.getenv('TEAM_COLLECTION')
 # Frequently used server channels
 bot_testing_channel=1271304798888656999
 new_member_announce=1271334787122073691
+admin_channels = 1271528702504730675, 1271304798888656999
 
 # Server ID
 scl_server=1113860513575731282
